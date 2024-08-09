@@ -16,8 +16,9 @@ using Org.BouncyCastle.Math;
 namespace HardMail
 {
     // AES-GCM (Advanced Encryption Standard in Galois/Counter Mode) 
-	// Storage is a placeholder, you'll have to provide your own storage
-	// PassMan is another placeholder, this one used to encrypt/decrypt the private key (hint: use BouncyCastle)
+    // Storage is a placeholder, you'll have to provide your own storage
+    // PassMan is another placeholder, this one used to encrypt/decrypt the private key (hint: use BouncyCastle)
+    // Thanks for Claude.ai for helping write this code!
     internal class BouncyCastleECIES
     {
         static readonly SecureRandom _random = new SecureRandom();
@@ -42,7 +43,7 @@ namespace HardMail
             return pubkey;
         }
 
-		// before anything encryption can happen we have to know if they have our public key and if we have their public key
+	// before any encryption can happen we have to know if they have our public key and if we have their public key
         internal static void SetTheyHaveOurKey(string myself, string them)
         {
             string storedkey = $"{myself}->{them}";
