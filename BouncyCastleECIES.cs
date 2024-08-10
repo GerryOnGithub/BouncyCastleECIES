@@ -71,9 +71,6 @@ namespace HardMail
             Debug.WriteLine($"Alice's public key: {alicePublicKeyString}");
             Debug.WriteLine($"Bob's public key: {bobPublicKeyString}");
 
-            // e.g. Alice's public key: BE+C3CajzG8oOjAjwsaTuQ3113Oc/KwqeHA7cytuBSISYPbYRQXmAqb8aBpXan4hXu1X/keM4l2CZ46ENyR9B5I=
-            // e.g. Bob's public key: BFre2pnZg+gzph5q8ILwDPaPXfX45wUbMndpa9jcUbmgmeOkNOpS2MgJoP8wB2fECVgshOhA1Cv7bczSRDa5U+Y=
-
             ECPublicKeyParameters aliceReceivedBobPublicKey = StringToPublicKey(bobPublicKeyString);
             ECPublicKeyParameters bobReceivedAlicePublicKey = StringToPublicKey(alicePublicKeyString);
 
