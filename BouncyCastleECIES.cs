@@ -19,6 +19,7 @@ namespace HardMail
     // Sorry I am not providing classes Storage, PassMan and AddressBook but their usage is pretty obvious. 
     // AddressBook is used for others public keys because the program makes their public keys visible to the user.
     // Refer to method EncryptDecryptTest() for how to use this class, also key-to-string and string-to-key methods are handy.
+    // 'myself' and 'them' uniquely identify people, I use email addresses
     // Thanks to Claude.ai for helping write this code!
     internal class BouncyCastleECIES
     {
@@ -26,14 +27,14 @@ namespace HardMail
         static readonly string Curve = "secp256r1";
 
         // create my public and private keys if they don't exist
-	// myself and them uniquely identify people, I use email addresses
-        internal static string VerifyMyKey(string myself, string them)
+        internal static string VerifyMyKey(string myself)
         {
             string storedkey = $"{myself}.public";
             string pubkey = Storage.GetStringValue(storedkey);
             if (!string.IsNullOrEmpty(pubkey))
                 return pubkey;
 
+	    // no keys - create and return
             AsymmetricCipherKeyPair keyPair = GenerateKeyPair();
             pubkey = PublicKeyToString((ECPublicKeyParameters)keyPair.Public);
             Storage.SetValue(storedkey, pubkey);
@@ -46,10 +47,10 @@ namespace HardMail
         }
 
 	// before any encryption can happen we have to know if they have our public key and if we have their public key
-        internal static void SetTheyHaveOurKey(string myself, string them)
+        internal static void SetTheyHaveOurKey(string myself, string them, bool value)
         {
             string storedkey = $"{myself}->{them}";
-            Storage.SetValue(storedkey, true);
+            Storage.SetValue(storedkey, value);
         }
 
         internal static bool TheyHaveOurKey(string myself, string them)
