@@ -15,9 +15,10 @@ using Org.BouncyCastle.Math;
 
 namespace HardMail
 {
-    // AES-GCM (Advanced Encryption Standard in Galois/Counter Mode) 
-    // Storage is a placeholder, you'll have to provide your own storage
-    // PassMan is another placeholder, this one used to encrypt/decrypt the private key (hint: use BouncyCastle)
+    // AES-GCM (Advanced Encryption Standard in Galois/Counter Mode)
+    // Sorry I am not providing classes Storage, PassMan and AddressBook but their usage is pretty obvious. 
+    // AddressBook is used for others public keys because the program makes their public keys visible to the user.
+    // Refer to method EncryptDecryptTest() for how to use this class, also key-to-string and string-to-key methods are handy.
     // Thanks to Claude.ai for helping write this code!
     internal class BouncyCastleECIES
     {
@@ -25,6 +26,7 @@ namespace HardMail
         static readonly string Curve = "secp256r1";
 
         // create my public and private keys if they don't exist
+	// myself and them uniquely identify people, I use email addresses
         internal static string VerifyMyKey(string myself, string them)
         {
             string storedkey = $"{myself}.public";
@@ -47,8 +49,7 @@ namespace HardMail
         internal static void SetTheyHaveOurKey(string myself, string them)
         {
             string storedkey = $"{myself}->{them}";
-            if (them.IndexOf(',') < 0)
-                Storage.SetValue(storedkey, true);
+            Storage.SetValue(storedkey, true);
         }
 
         internal static bool TheyHaveOurKey(string myself, string them)
@@ -57,6 +58,7 @@ namespace HardMail
             return Storage.GetBoolValue(storedkey);
         }
 
+	// this is just a test/demonstration method
         internal static void EncryptDecryptTest()
         {
             AsymmetricCipherKeyPair aliceKeyPair = GenerateKeyPair();
@@ -92,12 +94,11 @@ namespace HardMail
             return Convert.ToBase64String(encrypted);
         }
 
-        // requires senders's public key and my private key
         internal static string Decrypt(string myself, string them, string encryptedContent)
         {
             try
             {
-                object theirPublicKey = new AddressBookTable().GetTheirKey(them);
+                object theirPublicKey = new AddressBook().GetTheirKey(them);
                 if (them == null || string.IsNullOrEmpty(theirPublicKey as string))
                 {
                     Logger.Instance.Error("Failed to find key for " + them);
