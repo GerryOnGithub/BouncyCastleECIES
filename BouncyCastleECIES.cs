@@ -18,7 +18,7 @@ namespace HardMail
     // AES-GCM (Advanced Encryption Standard in Galois/Counter Mode) 
     // Storage is a placeholder, you'll have to provide your own storage
     // PassMan is another placeholder, this one used to encrypt/decrypt the private key (hint: use BouncyCastle)
-    // Thanks for Claude.ai for helping write this code!
+    // Thanks to Claude.ai for helping write this code!
     internal class BouncyCastleECIES
     {
         static readonly SecureRandom _random = new SecureRandom();
