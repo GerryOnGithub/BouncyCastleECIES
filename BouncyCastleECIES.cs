@@ -13,7 +13,7 @@ using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Crypto.Macs;
 using Org.BouncyCastle.Math;
 
-namespace HardMail
+namespace SomeNamespace
 {
     // AES-GCM (Advanced Encryption Standard in Galois/Counter Mode)
     // Sorry I am not providing classes Storage, PassMan and AddressBook but their usage is pretty obvious. 
