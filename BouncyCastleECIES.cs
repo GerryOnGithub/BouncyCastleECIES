@@ -26,7 +26,7 @@ namespace SomeNamespace
         static readonly SecureRandom _random = new SecureRandom();
         static readonly string Curve = "secp256r1";
 
-        // create my public and private keys if they don't exist
+        // return my public key (create public and private keys if they don't yet exist)
         internal static string VerifyMyKey(string myself)
         {
             string storedkey = $"{myself}.public";
@@ -46,7 +46,7 @@ namespace SomeNamespace
             return pubkey;
         }
 
-	// before any encryption can happen we have to know if they have our public key and if we have their public key
+	// before sending encrypted data we need to know if public keys have been exchanged
         internal static void SetTheyHaveOurKey(string myself, string them, bool value)
         {
             string storedkey = $"{myself}->{them}";
