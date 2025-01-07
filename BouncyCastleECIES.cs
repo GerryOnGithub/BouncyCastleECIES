@@ -16,8 +16,9 @@ using Org.BouncyCastle.Math;
 namespace SomeNamespace
 {
     // AES-GCM (Advanced Encryption Standard in Galois/Counter Mode)
-    // Sorry I am not providing classes Storage, PassMan and AddressBook but their usage is pretty obvious. 
-    // AddressBook is used for others public keys because the program makes their public keys visible to the user.
+    // Classes Storage, PassMan and AddressBook not provided, but their usage is obvious. 
+    // AddressBook is used for other's public keys. 
+    // PassMan is a just a local private key encryption utility.
     // Refer to method EncryptDecryptTest() for how to use this class, also key-to-string and string-to-key methods are handy.
     // 'myself' and 'them' uniquely identify people, I use email addresses
     // Thanks to Claude.ai for helping write this code!
